@@ -25,7 +25,6 @@ First let's remind ourself how the data looks like
 
 ```{r}
 str(gapminder)
-summary(gapminder)
 ```
 
 ## Syntax 
@@ -35,28 +34,14 @@ summary(gapminder)
 plot(x, y)  
 lines(x, y)
 
-```{r}
-plot(x = gapminder$lifeExp, y = gapminder$gdpPercap) 
-```
-
 
 ### Lattice
 
 xyplot(y~x, data)
 
-```{r}
-xyplot(gdpPercap~lifeExp, data =  gapminder)
-```
-
-
 ### ggplot2
 
 ggplot(data, aes(x, y)) + geom_point()
-
-```{r}
-ggplot(data =  gapminder, aes(x = lifeExp, y = gdpPercap)) + geom_point()
-```
-
 
 
 ## Changing text and colors 
