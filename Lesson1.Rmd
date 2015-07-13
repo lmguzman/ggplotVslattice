@@ -79,7 +79,6 @@ We can change the scale of the plots to see the relationship between life expect
 ### Lattice
 
 ```{r}
-xyplot(gdpPercap ~ lifeExp, data = gapminder, pch = 16, col = 'black')
 
 xyplot(gdpPercap ~ lifeExp, data = gapminder, pch = 16, col = 'black', scales = list(y = list(log = 10)))
 
@@ -88,7 +87,6 @@ xyplot(gdpPercap ~ lifeExp, data = gapminder, pch = 16, col = 'black', scales = 
 ### ggplot2 
 
 ```{r}
-ggplot(data = gapminder, aes(x = lifeExp, y = gdpPercap)) + geom_point()
 
 ggplot(data = gapminder, aes(x = lifeExp, y = gdpPercap)) + geom_point() + scale_y_log10()
 
@@ -104,7 +102,6 @@ The data in the layers is the same, and they create the objects we perceive in t
 
 ```{r}
 
-xyplot(lifeExp ~ gdpPercap, gapminder, scales = list(x = list(log = 10)), type = c("p"), pch = 16, col = 'black')
 
 xyplot(lifeExp ~ gdpPercap, gapminder, scales = list(x = list(log = 10, equispaced.log = FALSE)), type = c("p", "r"), col.line = "darkorange", lwd = 3, pch = 16, col = 'black')
 
@@ -114,7 +111,6 @@ xyplot(lifeExp ~ gdpPercap, gapminder, scales = list(x = list(log = 10, equispac
 ### ggplot2
 
 ```{r}
-ggplot(data = gapminder, aes(x=gdpPercap, y=lifeExp)) + geom_point() + scale_x_log10()
 
 ggplot(data = gapminder, aes(x=gdpPercap, y=lifeExp)) + geom_point() + scale_x_log10() + geom_smooth(method = lm, se = FALSE, col = 'darkorange', lwd = 2)
 
@@ -128,14 +124,14 @@ Multipanels or facets contain each their own dataset.
 ### Lattice
 
 ```{r}
-histogram(~gdpPercap, data = gapminder)
+
 histogram(~gdpPercap | factor(continent), data = gapminder)
 ```
 
 ### ggplot2
 
 ```{r}
-ggplot(data = gapminder, aes(gdpPercap)) + geom_histogram(binwidth = 5000) 
+
 ggplot(data = gapminder, aes(gdpPercap)) + geom_histogram(binwidth = 5000) + facet_wrap(~continent)
 ```
 
