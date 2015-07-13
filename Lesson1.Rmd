@@ -152,9 +152,6 @@ cloud(z~x*y)
 ```{r}
 quakes$Magnitude <- equal.count(quakes$mag, 4)
 
-str(quakes)
-
-cloud(depth ~ lat * long, data = quakes, zlim = rev(range(quakes$depth)), screen = list(z = 105, x = -70), panel.aspect = 0.75, xlab = "Longitude", ylab = "Latitude", zlab = "Depth")
 
 cloud(depth ~ lat * long | Magnitude, data = quakes, zlim = rev(range(quakes$depth)), screen = list(z = 105, x = -70), panel.aspect = 0.75, xlab = "Longitude", ylab = "Latitude", zlab = "Depth")
 
