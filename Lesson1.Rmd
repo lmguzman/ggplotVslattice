@@ -1,0 +1,190 @@
+---
+title: "ggplot or lattice??"
+author: "Melissa"
+date: "June 30, 2015"
+output: html_document
+---
+
+First let's get all the packages that we need. 
+
+```{r}
+library(ggplot2)
+library(lattice)
+
+```
+
+## Data
+
+We will use the gapminder data set in order to compare these two plotting packages. 
+
+```{r}
+library(gapminder)
+```
+
+First let's remind ourself how the data looks like
+
+```{r}
+str(gapminder)
+summary(gapminder)
+```
+
+## Syntax 
+
+### Base R
+
+plot(x, y)  
+lines(x, y)
+
+```{r}
+plot(x = gapminder$lifeExp, y = gapminder$gdpPercap) 
+```
+
+
+### Lattice
+
+xyplot(y~x, data)
+
+```{r}
+xyplot(gdpPercap~lifeExp, data =  gapminder)
+```
+
+
+### ggplot2
+
+ggplot(data, aes(x, y)) + geom_point()
+
+```{r}
+ggplot(data =  gapminder, aes(x = lifeExp, y = gdpPercap)) + geom_point()
+```
+
+
+
+## Changing text and colors 
+
+After plotting our basic plots, we want to change characteristics of the plots like the colors and the labels. 
+
+###Lattice
+
+```{r}
+xyplot(gdpPercap~lifeExp, data = gapminder, pch = 16, col = 'black')
+
+xyplot(gdpPercap~lifeExp, data = gapminder, pch = 16, col = 'black', main = 'Scatterplot in lattice', xlab = 'Life Expectancy', ylab = 'GDP per Capita')
+
+xyplot(gdpPercap~lifeExp, data = gapminder, groups = continent, pch = 16, auto.key = TRUE)
+
+```
+
+
+###ggplot2
+
+```{r}
+ggplot(data = gapminder, aes(x = lifeExp, y = gdpPercap)) + geom_point()
+
+ggplot(data = gapminder, aes(x = lifeExp, y = gdpPercap)) + geom_point() + xlab("GDP per Capita") + ylab("Life expectancy") + ggtitle("Scatterplot in ggplot")
+
+ggplot(data = gapminder, aes(x = lifeExp, y = gdpPercap, color = continent)) + geom_point()
+```
+
+
+
+## Transformations and statistics
+
+We can change the scale of the plots to see the relationship between life expectancy and GDP per capita better. Changing the scale to a log10 scale is the same as calculating the log of the values. 
+
+### Lattice
+
+```{r}
+xyplot(gdpPercap ~ lifeExp, data = gapminder, pch = 16, col = 'black')
+
+xyplot(gdpPercap ~ lifeExp, data = gapminder, pch = 16, col = 'black', scales = list(y = list(log = 10)))
+
+```
+
+### ggplot2 
+
+```{r}
+ggplot(data = gapminder, aes(x = lifeExp, y = gdpPercap)) + geom_point()
+
+ggplot(data = gapminder, aes(x = lifeExp, y = gdpPercap)) + geom_point() + scale_y_log10()
+
+```
+
+
+
+## Layers
+
+The data in the layers is the same, and they create the objects we perceive in the plot. A plot may have many layers, eg. a linear regression can be overlaid on a scatterplot. 
+
+### Lattice
+
+```{r}
+
+xyplot(lifeExp ~ gdpPercap, gapminder, scales = list(x = list(log = 10)), type = c("p"), pch = 16, col = 'black')
+
+xyplot(lifeExp ~ gdpPercap, gapminder, scales = list(x = list(log = 10, equispaced.log = FALSE)), type = c("p", "r"), col.line = "darkorange", lwd = 3, pch = 16, col = 'black')
+
+```
+
+
+### ggplot2
+
+```{r}
+ggplot(data = gapminder, aes(x=gdpPercap, y=lifeExp)) + geom_point() + scale_x_log10()
+
+ggplot(data = gapminder, aes(x=gdpPercap, y=lifeExp)) + geom_point() + scale_x_log10() + geom_smooth(method = lm, se = FALSE, col = 'darkorange', lwd = 2)
+
+```
+
+
+## Histograms - Multipanels
+
+Multipanels or facets contain each their own dataset. 
+
+### Lattice
+
+```{r}
+histogram(~gdpPercap, data = gapminder)
+histogram(~gdpPercap | factor(continent), data = gapminder)
+```
+
+### ggplot2
+
+```{r}
+ggplot(data = gapminder, aes(gdpPercap)) + geom_histogram(binwidth = 5000) 
+ggplot(data = gapminder, aes(gdpPercap)) + geom_histogram(binwidth = 5000) + facet_wrap(~continent)
+```
+
+
+
+#Main differences
+
+
+## 3d surfaces
+
+ggplot2 does not support 3d surfaces, therefore use lattice. 
+
+For 3d surfaces you can use cloud or wireframe. 
+The general formula is:
+
+cloud(z~x*y)
+
+```{r}
+quakes$Magnitude <- equal.count(quakes$mag, 4)
+
+str(quakes)
+
+cloud(depth ~ lat * long, data = quakes, zlim = rev(range(quakes$depth)), screen = list(z = 105, x = -70), panel.aspect = 0.75, xlab = "Longitude", ylab = "Latitude", zlab = "Depth")
+
+cloud(depth ~ lat * long | Magnitude, data = quakes, zlim = rev(range(quakes$depth)), screen = list(z = 105, x = -70), panel.aspect = 0.75, xlab = "Longitude", ylab = "Latitude", zlab = "Depth")
+
+```
+
+
+## Data input
+
+* ggplot ONLY data frames
+* lattice and base can be data frames, vectors, others
+
+## Speed
+
+* Lattice faster than ggplot, specially when dealing with >10,000 observations per facet. 
