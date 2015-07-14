@@ -2,7 +2,9 @@
 title: "ggplot or lattice??"
 author: "Melissa"
 date: "June 30, 2015"
-output: html_document
+output:
+  html_document:
+    self_contained: no
 ---
 
 First let's get all the packages that we need. 
@@ -166,3 +168,12 @@ cloud(depth ~ lat * long | Magnitude, data = quakes, zlim = rev(range(quakes$dep
 ## Speed
 
 * Lattice faster than ggplot, specially when dealing with >10,000 observations per facet. 
+
+## The way you write the code
+
+* In lattice everything is written in one function, whereas in ggplot each modificaiton is done in layers and therefore it can be easier to debug. 
+
+## Themes
+
+* ggplot has a big array of themes already done using ggthemes. 
+see: https://github.com/jrnold/ggthemes
