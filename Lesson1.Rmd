@@ -5,6 +5,8 @@ date: "June 30, 2015"
 output: html_document
 ---
 
+#It shows how to do the basic plots in both ggplot2 and lattice
+
 First let's get all the packages that we need. 
 
 ```{r}
