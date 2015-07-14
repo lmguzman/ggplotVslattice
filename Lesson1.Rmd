@@ -2,9 +2,7 @@
 title: "ggplot or lattice??"
 author: "Melissa"
 date: "June 30, 2015"
-output:
-  html_document:
-    self_contained: no
+output: html_document
 ---
 
 First let's get all the packages that we need. 
@@ -60,7 +58,7 @@ xyplot(gdpPercap~lifeExp, data = gapminder, pch = 16, col = 'black', main = 'Sca
 xyplot(gdpPercap~lifeExp, data = gapminder, groups = continent, pch = 16, auto.key = TRUE)
 
 ```
-
+![Alt text](/Users/meli_gu8/Documents/Programs/R guide/VanRStudyGroup/GgplotVsLattice/Plots/Plot1.jpeg)
 
 ###ggplot2
 
