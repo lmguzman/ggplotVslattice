@@ -58,7 +58,7 @@ xyplot(gdpPercap~lifeExp, data = gapminder, pch = 16, col = 'black', main = 'Sca
 xyplot(gdpPercap~lifeExp, data = gapminder, groups = continent, pch = 16, auto.key = TRUE)
 
 ```
-![Alt text](/Users/meli_gu8/Documents/Programs/R guide/VanRStudyGroup/GgplotVsLattice/Plots/Plot1.jpeg)
+![Alt text](https://github.com/lmguzman/ggplotVslattice/blob/master/Plots/Plot1.jpeg)
 
 ###ggplot2
 
