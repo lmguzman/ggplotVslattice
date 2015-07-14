@@ -53,23 +53,43 @@ After plotting our basic plots, we want to change characteristics of the plots l
 ```{r}
 xyplot(gdpPercap~lifeExp, data = gapminder, pch = 16, col = 'black')
 
-xyplot(gdpPercap~lifeExp, data = gapminder, pch = 16, col = 'black', main = 'Scatterplot in lattice', xlab = 'Life Expectancy', ylab = 'GDP per Capita')
-
-xyplot(gdpPercap~lifeExp, data = gapminder, groups = continent, pch = 16, auto.key = TRUE)
-
 ```
 ![Alt text](https://github.com/lmguzman/ggplotVslattice/blob/master/Plots/Plot1.jpeg)
+
+```{r}
+xyplot(gdpPercap~lifeExp, data = gapminder, pch = 16, col = 'black', main = 'Scatterplot in lattice', xlab = 'Life Expectancy', ylab = 'GDP per Capita')
+
+```
+
+![Alt text](https://github.com/lmguzman/ggplotVslattice/blob/master/Plots/Plot2.jpeg)
+
+```{r}
+xyplot(gdpPercap~lifeExp, data = gapminder, groups = continent, pch = 16, auto.key = TRUE)
+```
+
+![Alt text](https://github.com/lmguzman/ggplotVslattice/blob/master/Plots/Plot3.jpeg)
+
 
 ###ggplot2
 
 ```{r}
 ggplot(data = gapminder, aes(x = lifeExp, y = gdpPercap)) + geom_point()
 
+```
+![Alt text](https://github.com/lmguzman/ggplotVslattice/blob/master/Plots/Plot4.jpeg)
+
+
+```{r}
 ggplot(data = gapminder, aes(x = lifeExp, y = gdpPercap)) + geom_point() + xlab("GDP per Capita") + ylab("Life expectancy") + ggtitle("Scatterplot in ggplot")
 
-ggplot(data = gapminder, aes(x = lifeExp, y = gdpPercap, color = continent)) + geom_point()
 ```
 
+![Alt text](https://github.com/lmguzman/ggplotVslattice/blob/master/Plots/Plot5.jpeg)
+
+```{r}
+ggplot(data = gapminder, aes(x = lifeExp, y = gdpPercap, color = continent)) + geom_point()
+```
+![Alt text](https://github.com/lmguzman/ggplotVslattice/blob/master/Plots/Plot6.jpeg)
 
 
 ## Transformations and statistics
@@ -84,6 +104,8 @@ xyplot(gdpPercap ~ lifeExp, data = gapminder, pch = 16, col = 'black', scales = 
 
 ```
 
+![Alt text](https://github.com/lmguzman/ggplotVslattice/blob/master/Plots/Plot7.jpeg)
+
 ### ggplot2 
 
 ```{r}
@@ -92,6 +114,7 @@ ggplot(data = gapminder, aes(x = lifeExp, y = gdpPercap)) + geom_point() + scale
 
 ```
 
+![Alt text](https://github.com/lmguzman/ggplotVslattice/blob/master/Plots/Plot8.jpeg)
 
 
 ## Layers
@@ -101,11 +124,10 @@ The data in the layers is the same, and they create the objects we perceive in t
 ### Lattice
 
 ```{r}
-
-
 xyplot(lifeExp ~ gdpPercap, gapminder, scales = list(x = list(log = 10, equispaced.log = FALSE)), type = c("p", "r"), col.line = "darkorange", lwd = 3, pch = 16, col = 'black')
 
 ```
+![Alt text](https://github.com/lmguzman/ggplotVslattice/blob/master/Plots/Plot9.jpeg)
 
 
 ### ggplot2
@@ -115,6 +137,9 @@ xyplot(lifeExp ~ gdpPercap, gapminder, scales = list(x = list(log = 10, equispac
 ggplot(data = gapminder, aes(x=gdpPercap, y=lifeExp)) + geom_point() + scale_x_log10() + geom_smooth(method = lm, se = FALSE, col = 'darkorange', lwd = 2)
 
 ```
+
+![Alt text](https://github.com/lmguzman/ggplotVslattice/blob/master/Plots/Plot10.jpeg)
+
 
 
 ## Histograms - Multipanels
@@ -128,12 +153,15 @@ Multipanels or facets contain each their own dataset.
 histogram(~gdpPercap | factor(continent), data = gapminder)
 ```
 
+![Alt text](https://github.com/lmguzman/ggplotVslattice/blob/master/Plots/Plot11.jpeg)
+
 ### ggplot2
 
 ```{r}
 
 ggplot(data = gapminder, aes(gdpPercap)) + geom_histogram(binwidth = 5000) + facet_wrap(~continent)
 ```
+![Alt text](https://github.com/lmguzman/ggplotVslattice/blob/master/Plots/Plot12.jpeg)
 
 
 
@@ -156,6 +184,8 @@ quakes$Magnitude <- equal.count(quakes$mag, 4)
 cloud(depth ~ lat * long | Magnitude, data = quakes, zlim = rev(range(quakes$depth)), screen = list(z = 105, x = -70), panel.aspect = 0.75, xlab = "Longitude", ylab = "Latitude", zlab = "Depth")
 
 ```
+
+![Alt text](https://github.com/lmguzman/ggplotVslattice/blob/master/Plots/Plot13.jpeg)
 
 
 ## Data input
